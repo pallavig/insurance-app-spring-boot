@@ -20,6 +20,10 @@ public class CustomerService {
         return customerRepository.save(new Customer(customerDto.getCustomerName()));
     }
 
+    public Customer getCustomerById(Integer id) {
+        return customerRepository.findById(id).get(); // what to do if object is not present - later
+    }
+
     // business
 
     // request(from controller) -> repo.save (customer object) -> return savedEntity
