@@ -25,8 +25,6 @@ public class CustomerRepositoryTest {
 
     @Test
     public void shouldSaveCustomer() {
-        assertEquals(0, customerRepository.findAll().size());
-
         assertEquals(1, customerRepository.findAll().size());
     }
 
