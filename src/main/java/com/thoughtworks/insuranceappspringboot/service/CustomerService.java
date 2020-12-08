@@ -44,3 +44,29 @@ public class CustomerService {
 // feature (used)
 // onion
 
+// HTTP methods
+
+// REST (resource)
+// GET -> getting a customer (resource)
+// POST -> creating customer
+// PUT -> update, 1 -> update name
+// DELETE -> delete resource
+
+
+// standards:
+// hotel menu
+// create a menu - POST (create a new resource)
+// users ask for menu - GET (retrieve the resource)
+// change the price of paneer - PUT (one of the field is updated)
+// no more serving paneer - DELETE
+
+// response code standards:
+// 200 -> ok
+// 201 -> created
+// 404 -> not found
+// 401 -> permission
+// 400 -> bad request
+
+
+
+

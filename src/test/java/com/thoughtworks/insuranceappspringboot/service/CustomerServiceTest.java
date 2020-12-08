@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Optional;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -39,5 +41,15 @@ public class CustomerServiceTest {
         // assert
         assertEquals(expected.getName(), result.getName());
         verify(customerRepository).save(expected);
+    }
+
+    @Test
+    public void shouldGetCustomerById() {
+        Customer expected = new Customer("customer-name");
+        Mockito.when(customerRepository.findById(1)).thenReturn(Optional.of(expected));
+
+        Customer actual = customerService.getCustomerById(1);
+
+        assertEquals(expected, actual);
     }
 }
