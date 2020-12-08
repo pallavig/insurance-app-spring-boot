@@ -1,6 +1,8 @@
 package com.thoughtworks.insuranceappspringboot.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Customer {
@@ -12,7 +14,6 @@ public class Customer {
     private String name;
 
     public Customer(String name) {
-        this.id = id;
         this.name = name;
     }
 

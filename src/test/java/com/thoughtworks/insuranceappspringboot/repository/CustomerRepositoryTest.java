@@ -1,6 +1,7 @@
 package com.thoughtworks.insuranceappspringboot.repository;
 
 import com.thoughtworks.insuranceappspringboot.model.Customer;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +17,20 @@ public class CustomerRepositoryTest {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Before
+    public void setUp() {
+        Customer customer = new Customer("customer-name");
+        customerRepository.save(customer);
+    }
+
     @Test
     public void shouldSaveCustomer() {
-        Customer customer = new Customer("customer-name");
-        System.out.println("customer before saving");
-        System.out.println(customer);
-
         assertEquals(0, customerRepository.findAll().size());
-        Customer savedCustoemr = customerRepository.save(customer);
-        System.out.println("Customer after saving");
-        System.out.println(savedCustoemr);
 
         assertEquals(1, customerRepository.findAll().size());
+    }
+
+    @Test
+    public void shouldFetchCustomerById() {
     }
 }
