@@ -3,6 +3,7 @@ package com.thoughtworks.insuranceappspringboot.service;
 import com.thoughtworks.insuranceappspringboot.model.Customer;
 import com.thoughtworks.insuranceappspringboot.repository.CustomerRepository;
 import com.thoughtworks.insuranceappspringboot.request.CustomerDto;
+import com.thoughtworks.insuranceappspringboot.response.CustomerResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,23 +33,26 @@ public class CustomerServiceTest {
     @Test
     public void shouldCreateCustomer() {
         // prepare
-        Customer expected = new Customer("customer-name");
-        Mockito.when(customerRepository.save(any())).thenReturn(expected);
+        CustomerResponse response = new CustomerResponse(1, "customer-name");
+        Customer customerWithId = new Customer(1, "customer-name");
+        Customer customer = new Customer("customer-name");
+        Mockito.when(customerRepository.save(any())).thenReturn(customerWithId);
 
         // act
-        Customer result = customerService.save(new CustomerDto("customer-name"));
+        CustomerResponse result = customerService.save(new CustomerDto("customer-name"));
 
         // assert
-        assertEquals(expected.getName(), result.getName());
-        verify(customerRepository).save(expected);
+        assertEquals(response.getName(), result.getName());
+        verify(customerRepository).save(customer);
     }
 
     @Test
     public void shouldGetCustomerById() {
-        Customer expected = new Customer("customer-name");
-        Mockito.when(customerRepository.findById(1)).thenReturn(Optional.of(expected));
+        CustomerResponse expected = new CustomerResponse(1, "customer-name");
+        Customer customer = new Customer(1, "customer-name");
+        Mockito.when(customerRepository.findById(1)).thenReturn(Optional.of(customer));
 
-        Customer actual = customerService.getCustomerById(1);
+        CustomerResponse actual = customerService.getCustomerById(1);
 
         assertEquals(expected, actual);
     }

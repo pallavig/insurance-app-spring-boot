@@ -8,6 +8,8 @@ import java.util.Objects;
 @Entity
 public class Customer {
 
+    // jpa, db response
+
     @Id
     @GeneratedValue
     private Integer id;
@@ -19,6 +21,11 @@ public class Customer {
     }
 
     public Customer() {
+    }
+
+    public Customer(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Integer getId() {

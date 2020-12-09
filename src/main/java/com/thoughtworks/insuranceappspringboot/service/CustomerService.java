@@ -1,8 +1,10 @@
 package com.thoughtworks.insuranceappspringboot.service;
 
+import com.thoughtworks.insuranceappspringboot.exception.CustomerNotFoundException;
 import com.thoughtworks.insuranceappspringboot.model.Customer;
 import com.thoughtworks.insuranceappspringboot.repository.CustomerRepository;
 import com.thoughtworks.insuranceappspringboot.request.CustomerDto;
+import com.thoughtworks.insuranceappspringboot.response.CustomerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +18,15 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Customer save(CustomerDto customerDto) {
-        return customerRepository.save(new Customer(customerDto.getCustomerName()));
+    public CustomerResponse save(CustomerDto customerDto) {
+        Customer savedCustomer = customerRepository.save(new Customer(customerDto.getCustomerName()));
+        return new CustomerResponse(savedCustomer.getId(), savedCustomer.getName());
+//        policyService.getPolicies(customerId)
     }
 
-    public Customer getCustomerById(Integer id) {
-        return customerRepository.findById(id).get(); // what to do if object is not present - later
+    public CustomerResponse getCustomerById(Integer id) {
+        Customer savedCustomer = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException());
+        return new CustomerResponse(savedCustomer.getId(), savedCustomer.getName());
     }
 
     // business
